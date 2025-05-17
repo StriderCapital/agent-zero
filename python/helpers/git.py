@@ -35,7 +35,15 @@ def get_git_info():
     except:
         tag = ""
 
-    version = branch[0].upper() + " " + ( short_tag or commit_hash[:7] )
+    # If the repository is in a detached HEAD state, `branch` will be an empty
+    # string which would cause an IndexError when accessing `branch[0]`.  In
+    # such case omit the branch prefix from the version string.
+    if branch:
+        branch_prefix = branch[0].upper() + " "
+    else:
+        branch_prefix = ""
+
+    version = branch_prefix + (short_tag or commit_hash[:7])
 
     # Create the dictionary with collected information
     git_info = {
