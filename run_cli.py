@@ -46,7 +46,7 @@ async def chat(context: AgentContext):
                     
                     
 
-        # exit the conversation when the user types 'exit'
+        # exit the conversation when the user types 'e'
         if user_input.lower() == 'e': break
 
         # send message to agent0, 
@@ -67,7 +67,7 @@ def intervention():
         user_input = input("> ").strip()
         PrintStyle(font_color="white", padding=False, log_only=True).print(f"> {user_input}")        
         
-        if user_input.lower() == 'e': os._exit(0) # exit the conversation when the user types 'exit'
+        if user_input.lower() == 'e': os._exit(0) # exit the conversation when the user types 'e'
         if user_input: context.streaming_agent.intervention_message = user_input # set intervention message if non-empty
         context.paused = False # continue agent streaming 
     
