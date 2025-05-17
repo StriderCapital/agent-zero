@@ -261,4 +261,16 @@ class DirtyJson:
         return result
 
     def index_of_first_brace(self, input_str: str) -> int:
-        return input_str.find("{")
+        """Return the index of the first opening JSON character.
+
+        The original implementation only searched for ``{`` which caused
+        ``parse`` to fail when the JSON string started with an array.  We now
+        search for both ``{`` and ``[`` and return the earliest occurrence.
+        If neither is found ``0`` is returned so parsing starts from the
+        beginning of the string.
+        """
+
+        brace_positions = [pos for pos in [input_str.find("{"), input_str.find("[")] if pos != -1]
+        if not brace_positions:
+            return 0
+        return min(brace_positions)
