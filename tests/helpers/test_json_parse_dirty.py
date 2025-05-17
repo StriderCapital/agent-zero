@@ -55,6 +55,11 @@ class TestJsonParseDirty(unittest.TestCase):
         }
         self.assertEqual(json_parse_dirty(json_string), expected_result)
 
+    def test_array_json(self):
+        json_string = '[1, 2, 3]'
+        expected_output = [1, 2, 3]
+        self.assertEqual(DirtyJson.parse_string(json_string), expected_output)
+
 
 if __name__ == '__main__':
     unittest.main()
