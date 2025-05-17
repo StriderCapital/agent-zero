@@ -413,7 +413,7 @@ class History(Record):
         return compressed
 
     async def merge_bulks_by(self, count: int):
-        if len(self.bulks) > 0:
+        if len(self.bulks) < count:
             return False
         bulks = await asyncio.gather(
             *[
